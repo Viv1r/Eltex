@@ -1,0 +1,31 @@
+<div class="dropdown">
+  <button
+    class="btn btn-secondary dropdown-toggle w-100"
+    type="button"
+    (click)="toggleActive()"
+  >
+    Выбрано {{ items.length }}
+  </button>
+
+  <div *ngIf="active" class="dropdown-menu w-auto" [ngClass]="{show: active}">
+    <a
+      *ngFor="let option of items; let i = index"
+      class="dropdown-item"
+      href="#"
+      (click)="deleteItem(i)"
+    >{{ option }}</a>
+
+    <a class="dropdown-item d-flex gap-1">
+      <input
+        #input
+        type="text"
+        class="input-group input-group-sm w-auto"
+        (keydown.enter)="addItem(input.value); input.value = ''"
+      >
+      <button
+        class="btn btn-dark btn-fill btn-wd"
+        (click)="addItem(input.value); input.value = ''"
+      >Добавить</button>
+    </a>
+  </div>
+</div>

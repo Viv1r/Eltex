@@ -1,0 +1,102 @@
+<div class="card p-3" #topAnchor>
+  <div class="header">
+    <h4 class="title">Добавление нового устройства</h4>
+  </div>
+  <div class="content">
+    <form #createForm="ngForm">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>Название</label>
+            <input
+              type="text"
+              class="form-control border-input"
+              name="input_title"
+              [(ngModel)]="newDevice.title.value"
+            >
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>Тип устройства</label>
+            <app-dropdown-list
+              placeholder="Выберите тип"
+              [options]="newDevice.deviceType.options"
+              (select)="newDevice.deviceType.pushValue($event)"
+            ></app-dropdown-list>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <label>Статус</label>
+          <app-dropdown-list
+            placeholder="Выберите статус"
+            [options]="newDevice.status.options"
+            (select)="newDevice.status.pushValue($event)"
+          ></app-dropdown-list>
+        </div>
+
+        <div class="col-md-3">
+          <label>ID дома</label>
+          <input
+            type="text"
+            class="form-control border-input"
+            name="input_title"
+            [(ngModel)]="newDevice.houseId.value"
+          >
+        </div>
+
+        <div class="col-md-2">
+          <label>Состояние</label>
+          <div class="form-group mt-2">
+            <app-checkbox-switch
+              (input)="newDevice.enabled.value = $event"
+              [value]="newDevice.enabled.value"
+            >Включён</app-checkbox-switch>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-md-2">
+          <label>Последняя активность</label>
+          <input
+            type="number"
+            class="form-control border-input"
+            name="input_title"
+            [(ngModel)]="newDevice.lastActivity.value"
+          >
+        </div>
+
+        <div class="col-md-3">
+          <label>Локации</label>
+          <app-editable-list
+            (updated)="newDevice.locations.value = $event"
+          ></app-editable-list>
+        </div>
+
+        <div class="col-md-4">
+          <label>Настройки</label>
+          <app-multiple-input
+            *ngIf="newDevice.settings.value"
+            [target]="newDevice.settings.value"
+          >
+            Выберите настройки
+          </app-multiple-input>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-md-3 g-3">
+          <button class="btn btn-info btn-fill btn-wd"
+            [disabled]="createForm.form.invalid"
+            (click)="addDevice()"
+          >
+            Добавить
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

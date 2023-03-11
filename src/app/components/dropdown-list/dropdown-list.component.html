@@ -1,0 +1,17 @@
+<div class="dropdown">
+  <button
+    class="btn btn-secondary dropdown-toggle w-100"
+    type="button"
+    (click)="toggleActive()"
+  >
+    {{ selectedOption || placeholder }}
+  </button>
+  <div *ngIf="active" class="dropdown-menu w-100" [ngClass]="{show: active}">
+    <a
+      *ngFor="let option of options"
+      class="dropdown-item"
+      href="#"
+      (click)="selectOption(option)"
+    >{{ option }}</a>
+  </div>
+</div>

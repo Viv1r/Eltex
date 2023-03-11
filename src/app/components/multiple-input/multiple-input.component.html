@@ -1,0 +1,17 @@
+<div class="dropdown">
+  <button
+    class="btn btn-secondary dropdown-toggle w-100"
+    type="button"
+    (click)="toggleActive()"
+  >
+    <ng-content></ng-content>
+  </button>
+  <div *ngIf="active" class="dropdown-menu w-100" [ngClass]="{show: active}">
+    <div
+      *ngFor="let key of target | objectKeys"
+      class="dropdown-item d-flex gap-2"
+    >
+      {{ key | titlecase }} <input #inp (input)="updateValue(key, inp.value)">
+    </div>
+  </div>
+</div>
