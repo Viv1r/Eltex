@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, ElementRef, HostListener, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-dropdown-list',
@@ -13,6 +13,8 @@ export class DropdownListComponent {
   active: boolean = false;
   selectedOption?: string;
 
+  constructor(private eRef: ElementRef) {}
+
   toggleActive(): void {
     this.active = !this.active;
   }
@@ -21,5 +23,12 @@ export class DropdownListComponent {
     this.select.emit(option);
     this.selectedOption = option;
     this.active = false;
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickOutside(event: Event) {
+    if(!this.eRef.nativeElement.contains(event.target)) {
+      this.active = false;
+    }
   }
 }

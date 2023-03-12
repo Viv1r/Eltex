@@ -12,7 +12,12 @@ export class Settings implements MultipleInput {
   name = '';
   password = '';
 
-  setValue(key: string, newValue: any) {
+  getValue(key: string): any {
+    const targetKey = key as keyof Settings;
+    return this[targetKey];
+  }
+
+  setValue(key: string, newValue: any): void {
     const targetKey = key as keyof Settings;
     this[targetKey] = newValue;
   }

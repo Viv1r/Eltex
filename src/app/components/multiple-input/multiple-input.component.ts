@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Settings } from "../../types/Device";
+import { Component, Input, OnInit, ElementRef, HostListener } from '@angular/core';
+import { Device, Settings } from "../../types/Device";
 import MultipleInput from "../../types/MultipleInput";
 
 @Component({
@@ -13,6 +13,8 @@ export class MultipleInputComponent implements OnInit {
   active: boolean = false;
   keys: string[] = [];
 
+  constructor(private eRef: ElementRef) {}
+
   ngOnInit(): void {
     this.keys = Object.keys(this.target);
   }
@@ -23,5 +25,12 @@ export class MultipleInputComponent implements OnInit {
 
   toggleActive(): void {
     this.active = !this.active;
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickOutside(event: Event) {
+    if(!this.eRef.nativeElement.contains(event.target)) {
+      this.active = false;
+    }
   }
 }

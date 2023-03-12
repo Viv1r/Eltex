@@ -11,7 +11,12 @@
       *ngFor="let key of target | objectKeys"
       class="dropdown-item d-flex gap-2"
     >
-      {{ key | titlecase }} <input #inp (input)="updateValue(key, inp.value)">
+      {{ key | titlecase }}
+      <input
+        #inp
+        (input)="updateValue(key, inp.value)"
+        [defaultValue]="target.getValue(key)"
+      >
     </div>
   </div>
 </div>

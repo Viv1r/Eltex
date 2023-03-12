@@ -4,12 +4,12 @@
     type="button"
     (click)="toggleActive()"
   >
-    Выбрано {{ items.length }}
+    Выбрано {{ model.length }}
   </button>
 
   <div *ngIf="active" class="dropdown-menu w-auto" [ngClass]="{show: active}">
     <a
-      *ngFor="let option of items; let i = index"
+      *ngFor="let option of model; let i = index"
       class="dropdown-item"
       href="#"
       (click)="deleteItem(i)"

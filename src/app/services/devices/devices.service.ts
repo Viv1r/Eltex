@@ -34,12 +34,18 @@ export class DevicesService {
 
   public addDevice(newDevice: Device): boolean {
     newDevice.id.value = this.generateId(12);
+    // Валидация обязательных полей
     if (
-      Object.values(newDevice)
-        .some(field => field.required && !field.value && field.value !== false)
+      Object.values(newDevice).some(field => {
+        if (typeof field.value === 'object') {
+          return field.required && Object.values(field.value).some(val => !val);
+        }
+        return field.required && !field.value && field.value !== false;
+      })
     ) {
       return false;
     }
+
     this.devices.push(newDevice);
     this.saveDevices();
     return true;

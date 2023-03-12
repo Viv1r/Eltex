@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, ElementRef, HostListener, EventEmitter, Input} from '@angular/core';
 
 @Component({
   selector: 'app-editable-list',
@@ -6,10 +6,11 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
   styleUrls: ['./editable-list.component.scss']
 })
 export class EditableListComponent {
-  @Output() updated = new EventEmitter<string[]>();
+  @Input() model: string[] = [];
 
   active: boolean = false;
-  items: string[] = [];
+
+  constructor(private eRef: ElementRef) {}
 
   toggleActive(): void {
     this.active = !this.active;
@@ -17,13 +18,18 @@ export class EditableListComponent {
 
   addItem(value: string): void {
     if (value) {
-      this.items.push(value);
-      this.updated.emit(this.items);
+      this.model.push(value);
     }
   }
 
   deleteItem(index: number): void {
-    this.items.splice(index, 1);
-    this.updated.emit(this.items);
+    this.model.splice(index, 1);
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickOutside(event: Event) {
+    if(!this.eRef.nativeElement.contains(event.target)) {
+      this.active = false;
+    }
   }
 }

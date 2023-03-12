@@ -72,7 +72,7 @@
         <div class="col-md-3">
           <label>Локации</label>
           <app-editable-list
-            (updated)="newDevice.locations.value = $event"
+            [model]="newDevice.locations.value || []"
           ></app-editable-list>
         </div>
 
