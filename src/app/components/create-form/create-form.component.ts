@@ -13,8 +13,11 @@ export class CreateFormComponent {
   constructor(public devicesService: DevicesService) {}
 
   addDevice(): void {
+    console.log('!!!!!');
     if (this.devicesService.addDevice(this.newDevice)) {
       this.newDevice = new Device();
+    } else {
+      alert('Некоторые поля не заполнены или заполнены неверно!');
     }
   }
 

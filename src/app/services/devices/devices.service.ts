@@ -37,7 +37,10 @@ export class DevicesService {
     // Валидация обязательных полей
     if (
       Object.values(newDevice).some(field => {
-        if (typeof field.value === 'object') {
+        if (Array.isArray(field.value)) {
+          return field.required && !field.value.length;
+        }
+        if (typeof field.value === 'object' && field.value !== null) {
           return field.required && Object.values(field.value).some(val => !val);
         }
         return field.required && !field.value && field.value !== false;

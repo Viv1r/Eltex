@@ -1,12 +1,14 @@
-import {Component, EventEmitter, ElementRef, HostListener, Input, Output} from '@angular/core';
+import {Component, EventEmitter, ElementRef, HostListener, Input, Output, OnChanges} from '@angular/core';
+import {Field} from "../../types/Device";
 
 @Component({
   selector: 'app-dropdown-list',
   templateUrl: './dropdown-list.component.html',
   styleUrls: ['./dropdown-list.component.scss']
 })
-export class DropdownListComponent {
+export class DropdownListComponent implements OnChanges {
   @Input() placeholder = 'Выберите вариант';
+  @Input() model = new Field<any>('');
   @Input() options?: string[];
   @Output() select = new EventEmitter<string>();
 
@@ -23,6 +25,10 @@ export class DropdownListComponent {
     this.select.emit(option);
     this.selectedOption = option;
     this.active = false;
+  }
+
+  ngOnChanges(): void {
+    this.selectedOption = this.model.value;
   }
 
   @HostListener('document:click', ['$event'])

@@ -3,7 +3,7 @@
     <h4 class="title">Добавление нового устройства</h4>
   </div>
   <div class="content">
-    <form #createForm="ngForm">
+    <form>
       <div class="row">
         <div class="col-md-3">
           <div class="form-group">
@@ -22,6 +22,7 @@
             <label>Тип устройства</label>
             <app-dropdown-list
               placeholder="Выберите тип"
+              [model]="newDevice.deviceType"
               [options]="newDevice.deviceType.options"
               (select)="newDevice.deviceType.pushValue($event)"
             ></app-dropdown-list>
@@ -32,6 +33,7 @@
           <label>Статус</label>
           <app-dropdown-list
             placeholder="Выберите статус"
+            [model]="newDevice.status"
             [options]="newDevice.status.options"
             (select)="newDevice.status.pushValue($event)"
           ></app-dropdown-list>
@@ -90,7 +92,6 @@
       <div class="row mt-3">
         <div class="col-md-3 g-4">
           <button class="btn btn-primary btn-fill btn-wd"
-            [disabled]="createForm.form.invalid"
             (click)="addDevice()"
           >
             Добавить
