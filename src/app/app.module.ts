@@ -11,6 +11,7 @@ import { DropdownListComponent } from './components/dropdown-list/dropdown-list.
 import { CheckboxSwitchComponent } from './components/checkbox-switch/checkbox-switch.component';
 import { EditableListComponent } from './components/editable-list/editable-list.component';
 import { MultipleInputComponent } from './components/multiple-input/multiple-input.component';
+import { ModalWindowComponent } from './components/modal-window/modal-window.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { MultipleInputComponent } from './components/multiple-input/multiple-inp
     DropdownListComponent,
     CheckboxSwitchComponent,
     EditableListComponent,
-    MultipleInputComponent
+    MultipleInputComponent,
+    ModalWindowComponent
   ],
     imports: [
         BrowserModule,

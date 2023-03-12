@@ -44,4 +44,11 @@ export class DevicesService {
     this.saveDevices();
     return true;
   }
+
+  public removeDevice(index: number): void {
+    if (confirm(`Удалить устройство "${this.devices[index].title.value}"?`)) {
+      this.devices.splice(index, 1);
+      this.saveDevices();
+    }
+  }
 }

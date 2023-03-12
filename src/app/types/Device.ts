@@ -45,4 +45,14 @@ export class Device {
   status = new Field<Status>(null, [...statusOptions]);
   locations = new Field<string[]>([]);
   settings = new Field<Settings>(new Settings());
+
+  static getValue(device: Device, key: string): any {
+    const targetKey = key as keyof Device;
+    const targetField = device[targetKey] as { value?: any };
+
+    if (targetField && targetField.value) {
+      return targetField.value;
+    }
+    return null;
+  }
 }
