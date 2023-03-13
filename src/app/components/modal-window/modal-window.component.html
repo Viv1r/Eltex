@@ -1,0 +1,37 @@
+<div
+  class="blackout_wrapper"
+>
+  <div class="modal" tabindex="-1" role="dialog" style="display: block">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fs-3">{{ target.title.value }}</h5>
+          <button type="button" class="btn-close" (click)="disableModal()"></button>
+        </div>
+        <ul class="list-group">
+          <li *ngFor="let key of target | objectKeys" class="list-group-item">
+
+            <div class="fs-4">{{ key | titlecase }}</div>
+
+            <ng-template [ngIf]="!isObject(getValue(target, key))">
+              <div class="fs-6">{{ getValue(target, key) }}</div>
+            </ng-template>
+
+            <ng-template [ngIf]="isObject(getValue(target, key))">
+              <ul class="list-unstyled">
+                <li *ngFor="let targetKey of getValue(target, key) | objectKeys" class="fs-5">
+                  {{ targetKey }}: {{ getValue(target, key)[targetKey] }}
+                </li>
+              </ul>
+            </ng-template>
+
+          </li>
+        </ul>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="removeTarget()">Удалить</button>
+          <button type="button" class="btn btn-secondary" (click)="disableModal()">Закрыть</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
